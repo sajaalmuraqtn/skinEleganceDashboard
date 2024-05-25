@@ -8,7 +8,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
 
-export default function CreateAdvertisement({ logo }) {
+export default function CreateAdvertisement() {
     let [statusError, setStatusError] = useState('');
     let navigate = useNavigate();
 
@@ -80,7 +80,6 @@ export default function CreateAdvertisement({ logo }) {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>SkinElegance|Advertisements-Add</title>
-                <meta property="og:image" content={`${logo}`} />
             </Helmet>
             {/*== Start Account Area Wrapper ==*/}
             <section className="section-space container" style={{ marginTop: '-70px', marginBottom: "-50px" }}>

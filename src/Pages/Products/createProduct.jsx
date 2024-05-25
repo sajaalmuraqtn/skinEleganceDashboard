@@ -8,7 +8,7 @@ import Loading from '../../Components/Loading/Loading.jsx';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
 
-export default function CreateProduct({ logo }) {
+export default function CreateProduct() {
     const [errors, setErrors] = useState([]);
     const [statusError, setStatusError] = useState('');
     const navigate = useNavigate();
@@ -101,7 +101,6 @@ export default function CreateProduct({ logo }) {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>SkinElegance|Products-Add</title>
-                <meta property="og:image" content={`${logo}`} />
             </Helmet>
             <section className="section-space container" style={{ marginTop: '-50px' }}>
                 {!categories.length === 0 ? (

@@ -4,7 +4,7 @@ import Loading from '../../Components/Loading/Loading.jsx';
 import axios from 'axios';
 import { Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-export default function UserProfile({ logo }) {
+export default function UserProfile() {
     const [user, setUser] = useState(null);
     const location = useLocation();
     async function getProfile() {
@@ -20,7 +20,6 @@ export default function UserProfile({ logo }) {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>SkinElegance|Users-{location.state.slug}</title>
-                <meta property="og:image" content={`${logo}`} />
             </Helmet>
             < section className="app-container section-space" style={{ height: '100vh' }}  >
                 <div className="container">

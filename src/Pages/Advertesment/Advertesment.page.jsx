@@ -5,7 +5,7 @@ import Loading from '../../Components/Loading/Loading.jsx';
 import axios from 'axios';
 import { Helmet } from 'react-helmet';
 
-export default function AdvertisementPage({logo}) {
+export default function AdvertisementPage() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const pageFromURL = queryParams.get('page');
@@ -100,7 +100,6 @@ export default function AdvertisementPage({logo}) {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>SkinElegance|Advertisements</title>
-                <meta property="og:image" content={`${logo}`} />
             </Helmet>
             <div className="app-content" style={{ height: advertisements.length < 10 ? "100vh" : '' }}>
                 {

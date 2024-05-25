@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { GlobalFunctionContext } from '../../Context/globalFunctionsContext.jsx';
 import { Helmet } from 'react-helmet';
-export default function CouponDetails({logo}) {
+export default function CouponDetails() {
     const [coupon, setCoupon] = useState(null);
     const { isCreatedThisMonth } = useContext(GlobalFunctionContext); // Access the context
     const location = useLocation();
@@ -57,7 +57,6 @@ export default function CouponDetails({logo}) {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>SkinElegance|Coupons-{location.state.slug}</title>
-                <meta property="og:image" content={`${logo}`} />
             </Helmet>
             < section className="app-container section-space" style={{marginTop:"-20px",marginBottom:'-140px'}} >
                 <div className="container">

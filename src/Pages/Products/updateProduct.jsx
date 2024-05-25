@@ -6,7 +6,7 @@ import Loading from '../../Components/Loading/Loading.jsx';
 import { useFormik } from 'formik';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
-export default function UpdateProduct({ logo }) {
+export default function UpdateProduct() {
   let [errors, setErrors] = useState([]);
   let [statusError, setStatusError] = useState('');
   let location = useLocation();
@@ -139,7 +139,6 @@ export default function UpdateProduct({ logo }) {
       <Helmet>
         <meta charSet="utf-8" />
         <title>SkinElegance|Products-{location.state.slug}-Update</title>
-        <meta property="og:image" content={`${logo}`} />
       </Helmet>
       <main className="main-content pb-10 container" style={{ marginTop: "-50px" }}>
         {(!product && categories.length === 0) ? <Loading height={100} fontSize={70} /> :

@@ -5,7 +5,7 @@ import Loading from '../../Components/Loading/Loading.jsx';
 import axios from 'axios';
 import { Helmet } from 'react-helmet';
 
-export default function CategoryPage({ logo }) {
+export default function CategoryPage() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const pageFromURL = queryParams.get('page');
@@ -103,7 +103,6 @@ export default function CategoryPage({ logo }) {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>SkinElegance|Categories</title>
-                <meta property="og:image" content={`${logo}`} />
             </Helmet>
             <div className="app-content" style={{ height: categories.length < 10 ? "100vh" : '' }}>
                 {

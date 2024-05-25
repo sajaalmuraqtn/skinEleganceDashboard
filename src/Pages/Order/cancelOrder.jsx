@@ -7,7 +7,7 @@ import { useFormik } from 'formik';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
 
-export default function CancelOrder({ logo }) {
+export default function CancelOrder() {
     const [order, setOrder] = useState(null);
     const location = useLocation();
     let [statusError, setStatusError] = useState('');
@@ -61,7 +61,6 @@ export default function CancelOrder({ logo }) {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>SkinElegance|Orders-CancelOrder</title>
-                <meta property="og:image" content={`${logo}`} />
             </Helmet>
             <main className="main-content pb-10 container" style={{ marginTop: "-50px", height: '106.5vh' }}>
                 {!order ? <Loading height={100} fontSize={70} /> :

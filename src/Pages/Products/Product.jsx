@@ -5,7 +5,7 @@ import Loading from '../../Components/Loading/Loading.jsx';
 import axios from 'axios';
 import { Helmet } from 'react-helmet';
 
-export default function Product({ logo }) {
+export default function Product() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const pageFromURL = queryParams.get('page');
@@ -103,7 +103,6 @@ export default function Product({ logo }) {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>SkinElegance|Products</title>
-                <meta property="og:image" content={`${logo}`} />
             </Helmet>
             <div className="app-content" style={{ height: products.length < 8 ? "100vh" : '' }}>
                 {

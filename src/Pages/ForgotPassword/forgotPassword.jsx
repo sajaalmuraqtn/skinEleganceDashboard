@@ -7,7 +7,7 @@ import * as Yup from 'yup'; // Import Yup as a whole module
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
 
-export default function ForgotPassword({logo}) {
+export default function ForgotPassword() {
   let [errors, setErrors] = useState([]);
   let [statusError, setStatusError] = useState('');
   let navigate = useNavigate();
@@ -46,7 +46,6 @@ export default function ForgotPassword({logo}) {
       <Helmet>
         <meta charSet="utf-8" />
         <title>SkinElegance|ForgotPassword</title>
-        <meta property="og:image" content={`${logo}`} />
       </Helmet>
       <section className="section-space" style={{ height: '100vh' }}>
         <div className="container">

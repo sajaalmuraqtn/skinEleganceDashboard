@@ -7,7 +7,7 @@ import Loading from '../../Components/Loading/Loading.jsx';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
 
-export default function ProductDetails({ logo }) {
+export default function ProductDetails() {
 
     const [product, setProduct] = useState(null);
     const { isCreatedThisMonth, selectRandomColor } = useContext(GlobalFunctionContext); // Access the context
@@ -75,7 +75,6 @@ export default function ProductDetails({ logo }) {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>SkinElegance|Products-{location.state.slug}</title>
-                <meta property="og:image" content={`${logo}`} />
             </Helmet>
             < section className="app-container section-space" style={{ height: !product ? '125vh' : '', marginTop: "-50px", marginBottom: '-140px' }} >
                 {!product ? (

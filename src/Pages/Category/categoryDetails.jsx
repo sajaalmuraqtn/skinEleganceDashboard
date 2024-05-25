@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { GlobalFunctionContext } from '../../Context/globalFunctionsContext.jsx';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
-export default function CategoryDetails({ logo }) {
+export default function CategoryDetails() {
     const [category, setCategory] = useState(null);
     const location = useLocation();
     let navigate = useNavigate();
@@ -61,7 +61,6 @@ export default function CategoryDetails({ logo }) {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>SkinElegance|Categories-{location.state.slug}</title>
-                <meta property="og:image" content={`${logo}`} />
             </Helmet>
             < section className="app-container section-space" style={{ marginTop: "-20px", marginBottom: '-140px' }}  >
                 <div className="container">

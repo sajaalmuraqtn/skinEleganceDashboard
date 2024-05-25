@@ -7,7 +7,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
 
-export default function CreateCoupon({ logo }) {
+export default function CreateCoupon() {
     let [errors, setErrors] = useState([]);
     let [statusError, setStatusError] = useState('');
     let navigate = useNavigate();
@@ -66,7 +66,6 @@ export default function CreateCoupon({ logo }) {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>SkinElegance|Coupons-Add</title>
-                <meta property="og:image" content={`${logo}`} />
             </Helmet>
             <section className="section-space container">
                 <div className="container">

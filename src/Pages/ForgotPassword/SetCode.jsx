@@ -2,13 +2,12 @@ import React from 'react'
 import textThemeSlider from '../../assets/register_login.png'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
-export default function SetCode({logo}) {
+export default function SetCode() {
   return (
     <>
       <Helmet>
         <meta charSet="utf-8" />
         <title>SkinElegance|ForgotPassword-SetCode</title>
-        <meta property="og:image" content={`${logo}`} />
       </Helmet>
       <section className="section-space" style={{ height: '100vh' }}>
         <div className="container">

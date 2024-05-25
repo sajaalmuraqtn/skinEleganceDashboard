@@ -7,7 +7,7 @@ import { useFormik } from 'formik';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
 
-export default function UpdateService({ logo }) {
+export default function UpdateService() {
   let [errors, setErrors] = useState([]);
   let [statusError, setStatusError] = useState('');
   let location = useLocation();
@@ -102,7 +102,6 @@ export default function UpdateService({ logo }) {
       <Helmet>
         <meta charSet="utf-8" />
         <title>SkinElegance|Service-{location.state.slug}-Update</title>
-        <meta property="og:image" content={`${logo}`} />
       </Helmet>
       <main className="main-content pb-10 container" style={{ marginTop: "-50px" }}>
         {!service ? <Loading height={100} fontSize={70} /> :

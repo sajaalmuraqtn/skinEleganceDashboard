@@ -5,7 +5,7 @@ import Loading from '../../Components/Loading/Loading.jsx';
 import axios from 'axios';
 import { Helmet } from 'react-helmet';
 
-export default function Orders({ logo }) {
+export default function Orders() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const pageFromURL = queryParams.get('page');
@@ -97,7 +97,6 @@ export default function Orders({ logo }) {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>SkinElegance|Orders</title>
-                <meta property="og:image" content={`${logo}`} />
             </Helmet>
             <div className="app-content" style={{ height: orders.length < 9 ? "100vh" : '' }} >
                 {(!params.get('query') && orders.length == 0) ? <Loading margin={20} height={200} fontSize={70} />

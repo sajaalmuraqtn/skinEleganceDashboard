@@ -7,7 +7,7 @@ import * as Yup from 'yup'; // Import Yup as a whole module
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
-export default function ResetPassword({ logo }) {
+export default function ResetPassword() {
 
   // Use array destructuring to get the state variable and the function to update it
   let [errors, setErrors] = useState([]);
@@ -57,7 +57,6 @@ export default function ResetPassword({ logo }) {
       <Helmet>
         <meta charSet="utf-8" />
         <title>SkinElegance|ResetPassword</title>
-        <meta property="og:image" content={`${logo}`} />
       </Helmet>
       <section className="section-space" style={{marginBottom: '-80px'  }} >
         <div className="container">

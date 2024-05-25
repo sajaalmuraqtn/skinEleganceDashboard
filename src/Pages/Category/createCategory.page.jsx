@@ -8,7 +8,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
 
-export default function CreateCategory({ logo }) {
+export default function CreateCategory() {
     // Use array destructuring to get the state variable and the function to update it
     let [errors, setErrors] = useState([]);
     let [statusError, setStatusError] = useState('');
@@ -64,7 +64,6 @@ export default function CreateCategory({ logo }) {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>SkinElegance|Categories-Add</title>
-                <meta property="og:image" content={`${logo}`} />
             </Helmet>
             {/*== Start Account Area Wrapper ==*/}
             <section className="section-space container">

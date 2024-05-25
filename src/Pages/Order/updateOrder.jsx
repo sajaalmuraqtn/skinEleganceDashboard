@@ -7,7 +7,7 @@ import { useFormik } from 'formik';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
 
-export default function UpdateOrder({ logo }) {
+export default function UpdateOrder() {
     let [errors, setErrors] = useState([]);
     let [statusError, setStatusError] = useState('');
     let location = useLocation();
@@ -65,7 +65,6 @@ export default function UpdateOrder({ logo }) {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>SkinElegance|Orders-Update</title>
-                <meta property="og:image" content={`${logo}`} />
             </Helmet>
             <main className="main-content pb-10 container" style={{ marginTop: "-50px", height: '106.5vh' }}>
                 {!order ? <Loading height={100} fontSize={70} /> :

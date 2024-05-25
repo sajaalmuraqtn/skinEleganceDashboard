@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import { Helmet } from 'react-helmet';
 
-export default function UpdateAdvertisement({ logo }) {
+export default function UpdateAdvertisement() {
   let [errors, setErrors] = useState([]);
   let [statusError, setStatusError] = useState('');
   let navigate = useNavigate();
@@ -128,7 +128,6 @@ export default function UpdateAdvertisement({ logo }) {
       <Helmet>
         <meta charSet="utf-8" />
         <title>SkinElegance|Advertisements-{location.state.slug}-Update</title>
-        <meta property="og:image" content={`${logo}`} />
       </Helmet>
       <main className="main-content pb-10 container" style={{ marginTop: '-50px' }}>
         {!advertisement ? <Loading height={100} fontSize={70} /> : <>

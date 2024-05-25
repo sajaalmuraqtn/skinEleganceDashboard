@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { GlobalFunctionContext } from '../../Context/globalFunctionsContext.jsx';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
-export default function ServiceDetails({ logo }) {
+export default function ServiceDetails() {
     const location = useLocation();
     let navigate = useNavigate();
     const { isCreatedThisMonth } = useContext(GlobalFunctionContext); // Access the context
@@ -74,8 +74,7 @@ export default function ServiceDetails({ logo }) {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>SkinElegance|Service-{location.state.slug}</title>
-                <meta property="og:image" content={`${logo}`} />
-            </Helmet>
+             </Helmet>
             < section className="app-container section-space" style={{ marginTop: "-50px", marginBottom: '-140px' }}  >
                 <div className="container">
                     {!service && !advertisement ? (

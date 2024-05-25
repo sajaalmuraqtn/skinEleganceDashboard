@@ -5,7 +5,7 @@ import Loading from '../../Components/Loading/Loading.jsx';
 import axios from 'axios';
 import { Helmet } from 'react-helmet';
 
-export default function CouponPage({ logo }) {
+export default function CouponPage() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const pageFromURL = queryParams.get('page');
@@ -104,7 +104,6 @@ export default function CouponPage({ logo }) {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>SkinElegance|Coupons</title>
-                <meta property="og:image" content={`${logo}`} />
             </Helmet>
             <div className="app-content" style={{ height: coupons.length < 10 ? "100vh" : '' }}>
                 {(!params.get('query') && coupons.length == 0) ? <Loading margin={60} height={200} fontSize={70} />

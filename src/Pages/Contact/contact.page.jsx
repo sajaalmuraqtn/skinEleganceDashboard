@@ -5,7 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
 
-export default function ContactsPage({ logo }) {
+export default function ContactsPage() {
     const location = useLocation();
     const navigate = useNavigate(); // Use useNavigate instead of useHistory
 
@@ -60,7 +60,6 @@ export default function ContactsPage({ logo }) {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>SkinElegance|Contacts</title>
-                <meta property="og:image" content={`${logo}`} />
             </Helmet>
             <div className="app-content" style={{ height: contacts.length < 10 ? "100vh" : '' }}>
                 {

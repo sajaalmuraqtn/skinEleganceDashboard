@@ -8,7 +8,7 @@ import Loading from '../../Components/Loading/Loading.jsx';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
 
-export default function UpdateCategory({ logo }) {
+export default function UpdateCategory() {
   // Use array destructuring to get the state variable and the function to update it
 
   let [errors, setErrors] = useState([]);
@@ -91,7 +91,6 @@ export default function UpdateCategory({ logo }) {
       <Helmet>
         <meta charSet="utf-8" />
         <title>SkinElegance|Categories-{location.state.slug}-Update</title>
-        <meta property="og:image" content={`${logo}`} />
       </Helmet>
       <main className="main-content pb-10 container" style={{ height: '100vh' }}>
         {/*== Start Product Category Area Wrapper ==*/}

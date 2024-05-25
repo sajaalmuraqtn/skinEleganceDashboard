@@ -5,7 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
 
-export default function OrderDetails({ logo }) {
+export default function OrderDetails() {
   const [products, setProducts] = useState(null);
   const [order, setOrder] = useState(null);
   let [statusError, setStatusError] = useState('');
@@ -52,7 +52,6 @@ export default function OrderDetails({ logo }) {
       <Helmet>
         <meta charSet="utf-8" />
         <title>SkinElegance|Orders-Details</title>
-        <meta property="og:image" content={`${logo}`} />
       </Helmet>
       {/*== Start Product Area Wrapper ==*/}
       {!order ? <Loading height={100} fontSize={70} width={1200} /> : <section className="app-container section-space" style={{ marginTop: "-50px" }} >
