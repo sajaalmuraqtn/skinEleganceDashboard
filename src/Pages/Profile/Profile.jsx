@@ -3,21 +3,20 @@ import "./profile.css"
 import { AuthContext } from '../../Context/Auth.context.jsx';
 import Loading from '../../Components/Loading/Loading.jsx';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 export default function Profile({ logo }) {
 
   const { getProfile, user } = useContext(AuthContext);
-
+const location=useLocation()
   useEffect(() => {
     getProfile()
-    console.log(user);
   }, [])
   return (
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>SkinElegance|{user.slug}</title>
+        <title>SkinElegance|{location.state.slug}</title>
         <meta property="og:image" content={`${logo}`} />
       </Helmet>
       <main className="main-content pt-10 pb-10 container" style={{ height: "100vh" }}>

@@ -11,9 +11,9 @@ export default function Navbar({ logo}) {
       <header className="header-area sticky-header header-transparent">
         <div className="container">
           <div className="row align-items-center">
-            <div className="col-5 col-lg-2 col-xl-1">
-              <div className="header-logo"> 
-                <Link className="nav-link active " aria-current="page" to=""> <img className="logo-main" src={logo} width={95} height={68} alt="Logo" /></Link>
+          <div className="col-5 col-lg-2 col-xl-1">
+              <div className="header-logo rounded-circle"> 
+                <Link className="nav-link active " aria-current="page" to=""> <img className="logo-main rounded-circle" src={logo} width={95} height={68} alt="Logo" /></Link>
               </div>
             </div>
 
@@ -24,7 +24,7 @@ export default function Navbar({ logo}) {
               <div className="header-action justify-content-end">
             
                   <div className="header-action-btn-container">
-                    <Link className="header-action-btn" to={'/Login'} style={{color: location.pathname === '/Login' ? '#ff6565':''}}>
+                    <Link className="header-action-btn" to={'/Login'} style={{color: location.pathname === '/Login' ? '#46D7D4':''}}>
                       <span className="icon">
                         <svg width={30} height={30} viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                           <rect className="icon-rect" width={30} height={30} fill="url(#pattern3)" />
@@ -40,7 +40,7 @@ export default function Navbar({ logo}) {
                     </Link>
                   </div>
                   {/* <div className="header-action-btn-container">
-                    <Link className="header-action-btn t" to={'/Register'} style={{color: location.pathname === '/Register' ? '#ff6565':''}}>
+                    <Link className="header-action-btn t" to={'/Register'} style={{color: location.pathname === '/Register' ? '#46D7D4':''}}>
                       <span className="icon">
                         <svg width={30} height={30} viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                           <rect className="icon-rect" width={30} height={30} fill="url(#pattern3)" />

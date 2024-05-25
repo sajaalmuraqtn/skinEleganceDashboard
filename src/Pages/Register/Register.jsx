@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import textThemeSlider from '../../assets/images/slider/text-theme.webp';
+import textThemeSlider from '../../assets/register_login.png';
 import { AuthContext } from '../../Context/Auth.context.jsx';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'; // Import Yup as a whole module
@@ -76,7 +76,9 @@ export default function Register() {
             {/* Start Skin Elegance Section */}
             <div className="col-lg-6 mb-8 position-fixed" style={{ zIndex: '999' }}>
               <div className="hero-slide-content">
-                <div className="hero-slide-text-img"><img src={textThemeSlider} width={427} height={232} alt="Image" /></div>
+                <div className="hero-slide-text-img">
+                  <img src={textThemeSlider} width={427} height={232} alt="Image" />
+                </div>
                 <h2 className="hero-slide-title">Skin elegance</h2>
                 <p className="hero-slide-desc">Redefining Beauty Through Care Products</p>
                 <Link className="btn btn-border-dark" to="Products">BUY NOW</Link>

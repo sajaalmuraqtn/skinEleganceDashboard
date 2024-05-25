@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-export default function SideBarComponent({ logo, user, LogOut }) {
+export default function SideBarComponent({ user, LogOut }) {
 
   let location = useLocation();
   return (
     <>
       <div className="sidebar">
-        <Link className="sidebar-header" to={'Profile'}>
+        <Link className="sidebar-header" state={{slug:user.slug}} to={'Profile'}>
           <div className="account-info-picture">
             <img src={user.image.secure_url} alt="Account" />
           </div>

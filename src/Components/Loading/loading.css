@@ -18,7 +18,7 @@
     width: 100%;
     position: absolute;
     bottom: 0px;
-    background: linear-gradient(#ff6565 100%, transparent 0) no-repeat;
+    background: linear-gradient(#46D7D4 100%, transparent 0) no-repeat;
     background-size: 0% auto;
     animation: 10s lineGrow linear infinite;
   }

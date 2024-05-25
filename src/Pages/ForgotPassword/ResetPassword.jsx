@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
-import textThemeSlider from '../../assets/images/slider/text-theme.webp';
+import textThemeSlider from '../../assets/register_login.png'
 import { AuthContext } from '../../Context/Auth.context.jsx';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'; // Import Yup as a whole module
@@ -59,22 +59,19 @@ export default function ResetPassword({ logo }) {
         <title>SkinElegance|ResetPassword</title>
         <meta property="og:image" content={`${logo}`} />
       </Helmet>
-      <section className="section-space" >
+      <section className="section-space" style={{marginBottom: '-80px'  }} >
         <div className="container">
-          <div className="row mb-n8" style={{ marginTop: '50px' }}>
+          <div className="row mb-n8" style={{ marginTop: '50px',marginBottom: '-200px'  }}>
             {/* Start Skin Elegance Section */}
-            <div className="col-lg-6 mb-8">
-              <div className="hero-slide-content">
-                <div className="hero-slide-text-img"><img src={textThemeSlider} width={427} height={232} alt="Image" /></div>
-                <h2 className="hero-slide-title">Skin elegance</h2>
-                <p className="hero-slide-desc">Redefining Beauty Through Care Products</p>
-                <Link className="btn btn-border-dark" to="Products">BUY NOW</Link>
+            <div className="col-12 col-md-6">
+              <div className="hero-slide-text-img" style={{ marginTop: '-60px' }}>
+                <Link to="/"><img src={textThemeSlider} width={480} alt="Image" /></Link>
               </div>
             </div>
             {/* End Skin Elegance Section */}
 
             {/* Start Login Section */}
-            <div className="col-lg-6 mb-8">
+            <div className="col-lg-6 mb-8" style={{ marginTop: '-80px'}}>
               <div className="my-account-item-wrap">
                 <h3 className="title fs-1">Reset Password</h3>
                 <div className="my-account-form">
