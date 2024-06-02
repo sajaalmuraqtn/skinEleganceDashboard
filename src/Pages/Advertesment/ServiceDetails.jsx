@@ -84,7 +84,7 @@ export default function ServiceDetails() {
                             <div className="col-lg-5">
                                 <div className="product-details-thumb ">
                                     <img src={service?.mainImage.secure_url} width={440} height={503} alt="Image" />
-                                    {isCreatedThisMonth(service.createdAt) && (<span className="flag-new" style={{ backgroundColor: 'red' }}>new</span>)}
+                                    {isCreatedThisMonth(service?.createdAt) && (<span className="flag-new" style={{ backgroundColor: 'red' }}>new</span>)}
 
                                 </div>
                             </div>
@@ -92,7 +92,7 @@ export default function ServiceDetails() {
                                 <h5 className="product-details-collection text-capitalize">{service?.advertisementName}</h5>
 
                                 <div className="product-details-content">
-                                    <h3 className="product-details-title text-capitalize">{service.name}</h3>
+                                    <h3 className="product-details-title text-capitalize">{service?.name}</h3>
 
                                     <div className="product-details-qty-list">
                                         <div className="qty-list-check">
@@ -125,17 +125,17 @@ export default function ServiceDetails() {
                                             <i class="fa-solid fa-phone fa-2xl" style={{ color: '#3ee302' }}></i>
                                             <span className='fs-4'> {advertisement?.phoneNumber}</span>
                                         </div>
-                                        {advertisement?.facebookLink ? <div className='social-Media'>
+                                        {advertisement?.facebookLink!=='-' ? <div className='social-Media'>
                                             <i class="fa-brands fa-facebook fa-2xl" style={{ color: '#007fe0' }}></i>
-                                            <a href={advertisement?.facebookLink} className='fs-4'> {advertisement.slug}</a>
+                                            <a href={advertisement?.facebookLink} className='fs-4'> {advertisement?.slug}</a>
                                         </div> : ''}
-                                        {advertisement?.instagramLink ? <div className='social-Media'>
+                                        {advertisement?.instagramLink!=='-' ? <div className='social-Media'>
                                             <i class="fa-brands fa-instagram fa-2xl" style={{ color: '#f702aa' }}></i>
-                                            <a href={advertisement?.instagramLink} className='fs-4'> {advertisement.slug}</a>
+                                            <a href={advertisement?.instagramLink} className='fs-4'> {advertisement?.slug}</a>
                                         </div> : ''}
                                         </ul>
                                     </div>
-                                    <Link className="btn bg-info" to={advertisement ? `/Advertisements/${advertisement.slug}/${service.slug}/Update` : '/'} state={{ serviceId: service._id, advertisementId: service.advertisementId, slug: service.slug }}>Update <i className="fa-solid fa-gear"></i></Link>
+                                    <Link className="btn bg-info" to={advertisement ? `/Advertisements/${advertisement?.slug}/${service?.slug}/Update` : '/'} state={{ serviceId: service?._id, advertisementId: service?.advertisementId, slug: service?.slug }}>Update <i className="fa-solid fa-gear"></i></Link>
 
                                 </div>
                             </div>

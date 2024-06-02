@@ -11,7 +11,7 @@ export default function SideBarComponent({ user, LogOut }) {
           <div className="account-info-picture">
             <img src={user.image.secure_url} alt="Account" />
           </div>
-          <span style={{ marginRight: "90px" }} className='title'>{user.userName}</span>
+          <span style={{ marginRight: "40px",marginLeft: "5px" }} className='title'> {user.userName}</span>
         </Link>
         <ul className="sidebar-list mt-4">
           <li className={location.pathname.includes('Orders')? "sidebar-list-item active" : "sidebar-list-item"}>
@@ -54,6 +54,12 @@ export default function SideBarComponent({ user, LogOut }) {
             <Link to={"Contacts"}>
               <i className="fa-solid fa-square-share-nodes fs-6"  style={{marginRight:'10px'}}></i>
               <span> Contacts</span>
+            </Link>
+          </li>
+          <li className={location.pathname.includes('SupportTeamContact') ? "sidebar-list-item active" : "sidebar-list-item"}>
+            <Link to={"SupportTeamContact"}>
+              <i className="fa-solid fa-envelope-open-text fs-6"  style={{marginRight:'10px'}}></i>
+              <span> SupportTeamContact</span>
             </Link>
           </li>
                          

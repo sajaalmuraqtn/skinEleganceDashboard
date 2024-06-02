@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import textThemeSlider from '../../assets/images/slider/text-theme.webp';
 import { AuthContext } from '../../Context/Auth.context.jsx';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'; // Import Yup as a whole module
@@ -21,7 +20,7 @@ export default function CreateAdvertisement() {
         file: Yup.mixed().required("Image is required"),
         status: Yup.string().required("Status is required").oneOf(['Active', 'Inactive'], "Status must be 'Active' or 'Inactive"),
         expiredDate: Yup.date().required("Expired date is required").min(new Date(), "Expired date must be greater than or equal to today"),
-        address: Yup.string().min(10, "Minimum characters is 10").max(100, "Maximum characters is 100"),
+        address: Yup.string().min(10, "Minimum characters is 10").max(100, "Maximum characters is 100").required("Address is required"),
         city: Yup.string().required("City is required").oneOf(['Hebron', 'Nablus', 'Jerusalem', 'Ramallah', 'Tulkarm', 'Jenin', 'Al-Bireh', 'Jericho', 'Yatta', 'Beit Jala'], "Invalid city")
     });
 
@@ -51,8 +50,19 @@ export default function CreateAdvertisement() {
     async function sendAdvertisementData(values) {
         const formData = new FormData();
         formData.append('name', values.name);
-        formData.append('facebookLink', values.facebookLink);
-        formData.append('instagramLink', values.instagramLink);
+        if(values.facebookLink){
+            formData.append('facebookLink', values.facebookLink);
+        }
+        else{
+            formData.append('facebookLink','-');
+        }
+        if(values.instagramLink){
+            formData.append('instagramLink', values.instagramLink);
+        }
+        else{
+            formData.append('instagramLink','-');
+        }
+      
         formData.append('description', values.description);
         formData.append('phoneNumber', values.phoneNumber);
         formData.append('mainImage', values.file);
@@ -118,6 +128,7 @@ export default function CreateAdvertisement() {
                                 <div className="form-group mb-6">
                                     <label htmlFor="order-city">Town / City <abbr className="required" title="required">*</abbr></label>
                                     <select id="order-city" name="city" value={formik.values.city} onChange={formik.handleChange} className="form-control wide">
+                                        <option selected>Select City</option>
                                         <option value={"Hebron"}>Hebron</option>
                                         <option value={"Nablus"}>Nablus</option>
                                         <option value={"Jerusalem"}>Jerusalem</option>
@@ -133,7 +144,7 @@ export default function CreateAdvertisement() {
                                 </div>
                                 <div className="form-group mb-6">
                                     <label htmlFor="street-address">Street address<abbr className="required" title="required">*</abbr></label>
-                                    <input type="text" id="street-address" name="address" className="form-control" value={formik.values.address} onChange={formik.handleChange} placeholder="House number and street name" />
+                                    <input type="text" id="street-address" name="address" className="form-control" value={formik.values.address} onChange={formik.handleChange} placeholder="center number and street name" />
                                     {formik.errors.address ? <p className="alert alert-danger mt-2">{formik.errors.address}</p> : ""}
                                 </div>
 

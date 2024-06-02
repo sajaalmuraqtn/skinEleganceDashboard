@@ -21,7 +21,6 @@ export default function Layout() {
   useEffect(() => {
     if (localStorage.getItem("adminToken")) {
       getProfile()
-      console.log(user);
     }
   }, [])
 

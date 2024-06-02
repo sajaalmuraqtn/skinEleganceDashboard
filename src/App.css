@@ -1601,7 +1601,7 @@ hr {
 .fancybox__carousel.is-draggable .fancybox__slide .fancybox__content,
 .modal-backdrop,
 .offcanvas-backdrop {
-  cursor: url(../images/icons/cancel-white.png), auto;
+  cursor: url(../src/assets/images/icons/cancel-white.png), auto;
 }
 .modal-backdrop,
 .offcanvas-backdrop {
@@ -1633,7 +1633,7 @@ hr {
   border-bottom: none;
 }
 .nice-select:after {
-  content: url(../images/icons/menu-down2.webp);
+  content: url(../src/assets/images/icons/menu-down2.webp);
   border: none;
   height: auto;
   width: auto;

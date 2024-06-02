@@ -18,7 +18,6 @@ export default function ProductDetails() {
     const getProduct = async (productId) => {
         try {
             const { data } = await axios.get(`/products/${productId}`);
-            console.log(data);
             if (data.message === "success") {
                 setProduct(data.product);
             }
@@ -66,9 +65,8 @@ export default function ProductDetails() {
 
     useEffect(() => {
         getProduct(location.state.productId);
-
     }
-        , []);
+        , [product]);
 
     return (
         <> {/*== Start Product Details Area Wrapper ==*/}
@@ -141,7 +139,7 @@ export default function ProductDetails() {
                                     </ul>
                                 </div>
 
-                                <Link className="btn bg-info" to={`/Products/Update/${product.slug}`} state={{ productId: product._id }}>Update <i className="fa-solid fa-gear"></i></Link>
+                                <Link className="btn bg-info" to={`/Products/Update/${product.slug}`} state={{ productId: product._id,slug:product.slug }}>Update <i className="fa-solid fa-gear"></i></Link>
 
                             </div>
                         </div>

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import textThemeSlider from '../../assets/images/slider/text-theme.webp';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'; // Import Yup as a whole module
 import axios from 'axios';

@@ -19,7 +19,7 @@ export default function UpdateProduct() {
     status: Yup.string().oneOf(['Active', 'Inactive'], "Status must be 'Active' or 'Inactive"),
     mainImage: Yup.mixed(),
     stock: Yup.number().positive("Stock must be a positive number").integer("Stock must be an integer"),
-    size: Yup.number().positive("Size must be a positive number"),
+    
     categoryId: Yup.string().min(24, "Category ID must be 24 characters").max(24, "Category ID must be 24 characters"),
     expiredDate: Yup.date().min(new Date(), "Expired date must be in the future"),
   });

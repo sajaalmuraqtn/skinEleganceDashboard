@@ -59,6 +59,9 @@ import UpdateOrder from './Pages/Order/updateOrder.jsx';
 import CancelOrder from './Pages/Order/cancelOrder.jsx';
 import UpdateContactOrder from './Pages/Order/UpdateContactOrder.jsx';
 import Home from './Pages/Home/Home.jsx';
+import CardDetails from './Pages/Order/CardDetails.jsx';
+import SupportTeamPage from './Pages/SupportTeam/supportTeamMessage.jsx';
+import SupportTeamDetailsPage from './Pages/SupportTeam/SupportTeamDetailsPage.jsx';
 
 axios.defaults.baseURL = 'https://skinelegance-ecommerce-nodejs.onrender.com';
 
@@ -94,12 +97,15 @@ function App() {
       { path: 'Coupons/:couponId', element: <ProtectedRouter><CouponDetails /></ProtectedRouter> },
       { path: 'Coupons/Add', element: <ProtectedRouter><CreateCoupon /> </ProtectedRouter>},
       { path: 'Coupons/Update/:couponId', element: <ProtectedRouter><UpdateCoupon /></ProtectedRouter> },
-      { path: 'Orders', element:<ProtectedRouter><Orders /></ProtectedRouter> },
+       { path: 'Orders', element:<ProtectedRouter><Orders /></ProtectedRouter> },
+      { path: 'Orders/CardDetails', element:<ProtectedRouter><CardDetails /></ProtectedRouter> },
       { path: 'Orders/OrderDetails', element:<ProtectedRouter><OrderDetails /></ProtectedRouter> },
       { path: 'Orders/Order/Update', element:<ProtectedRouter><UpdateOrder /></ProtectedRouter> },
       { path: 'Orders/Order/Cancel', element:<ProtectedRouter><CancelOrder /></ProtectedRouter> },
       { path: 'Orders/Order/UpdateContact', element:<ProtectedRouter><UpdateContactOrder/></ProtectedRouter> },
       { path: 'Contacts', element:<ProtectedRouter><ContactsPage /></ProtectedRouter> },
+      { path: 'SupportTeamContact', element:<ProtectedRouter><SupportTeamPage /></ProtectedRouter> },
+      { path: 'SupportTeamContact/:userId', element:<ProtectedRouter><SupportTeamDetailsPage /></ProtectedRouter> },
       { path: 'Contacts/Add', element:<ProtectedRouter><CreateContact /></ProtectedRouter> },
       { path: 'Users', element: <AuthContextProvider><ProtectedRouter><UsersPage /></ProtectedRouter></AuthContextProvider> },
       { path: 'Users/:userId', element: <ProtectedRouter><UserProfile /></ProtectedRouter> },

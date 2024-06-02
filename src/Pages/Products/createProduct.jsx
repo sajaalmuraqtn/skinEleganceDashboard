@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import textThemeSlider from '../../assets/images/slider/text-theme.webp';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -31,7 +30,7 @@ export default function CreateProduct() {
         stock: Yup.number().required("Stock is required").positive("Stock must be a positive number").integer("Stock must be an integer"),
         price: Yup.number().required("Price is required").positive("Price must be a positive number"),
         size: Yup.number().positive("Size must be a positive number"),
-        discount: Yup.number().positive("Discount must be a positive number").min(1, "Minimum discount is 1"),
+        discount: Yup.number().positive("Discount must be a positive number").required("Discount is required").min(1, "Minimum discount is 1"),
         status: Yup.string().required("Status is required").oneOf(['Active', 'Inactive'], "Status must be 'Active' or 'Inactive"),
         categoryId: Yup.string().required("Category ID is required").min(24, "Category ID must be 24 characters").max(24, "Category ID must be 24 characters"),
         expiredDate: Yup.date().required("Expired date is required").min(new Date(), "Expired date must be in the future"),
@@ -71,7 +70,11 @@ export default function CreateProduct() {
         if (values.size) {
             formData.append('size', values.size);
         }
-        formData.append('discount', values.discount);
+        if(values.discount){
+            formData.append('discount', values.discount);
+        }else{
+            formData.append('discount',0);
+        }
         formData.append('categoryId', values.categoryId);
         formData.append('expiredDate', values.expiredDate);
         formData.append('mainImage', values.mainImage); // Access mainImage directly

@@ -118,11 +118,11 @@ export default function AdvertisementDetails() {
                                             <i class="fa-solid fa-phone fa-2xl" style={{ color: '#3ee302' }}></i>
                                             <span className='fs-4'> {advertisement?.phoneNumber}</span>
                                         </div>
-                                        {advertisement?.facebookLink ? <div className='social-Media'>
+                                        {advertisement?.facebookLink!=='-' ? <div className='social-Media'>
                                             <i class="fa-brands fa-facebook fa-2xl" style={{ color: '#007fe0' }}></i>
                                             <a href={advertisement?.facebookLink} className='fs-4'> {advertisement.slug}</a>
                                         </div> : ''}
-                                        {advertisement?.instagramLink ? <div className='social-Media'>
+                                        {advertisement?.instagramLink!=='-'? <div className='social-Media'>
                                             <i class="fa-brands fa-instagram fa-2xl" style={{ color: '#f702aa' }}></i>
                                             <a href={advertisement?.instagramLink} className='fs-4'> {advertisement.slug}</a>
                                         </div> : ''}
