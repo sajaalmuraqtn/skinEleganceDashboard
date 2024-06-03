@@ -15,32 +15,28 @@ export default function OrderDetails() {
     try {
       const token = localStorage.getItem('adminToken');
       const { data } = await axios.get(`/order/${location.state.orderId}`, { headers: { authorization: `Saja__${token}` } });
-      console.log(data);
       if (data.message === "success") {
         setProducts(data.order.products);
         setOrder(data.order);
-        console.log(order);
-      }
+       }
     } catch (error) {
-      console.log(error);
-    }
+     }
   };
 
   const ConfirmOrder = async (orderId) => {
-    try {
-      const token = localStorage.getItem('adminToken');
-      const { data } = await axios.patch(`/order/confirm/${orderId}`, {}, { headers: { authorization: `Saja__${token}` } }).catch((err)=>{
+       const token = localStorage.getItem('adminToken');
+       try {
+              const { data } = await axios.patch(`/order/confirm/${orderId}`, {}, { headers: { authorization: `Saja__${token}` } }).catch((err)=>{
         setStatusError(err.response.data.message)
       });
-      console.log(data);
-      if (data.message === "success") {
+
+       if (data.message === "success") {
         setOrder(data.order);
+        toast.success('Order Confirmed Successfully');
         getOrder();
-        toast.success('Order Confirmed Successfully')
-      }
-    } catch (error) {
-      console.log(error);
-    }
+      } } catch (error) {
+       }
+   
   };
   useEffect(() => {
     getOrder();

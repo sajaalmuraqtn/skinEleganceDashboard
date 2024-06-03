@@ -54,7 +54,7 @@ export default function UpdateCoupon() {
     }
 
     const token = localStorage.getItem("adminToken");
-
+    try {
     let { data } = await axios.put(`/coupon/${location.state.couponId}`, formData, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
       setStatusError(err.response.data.message);
       console.error(err.response.data.message);
@@ -67,10 +67,12 @@ export default function UpdateCoupon() {
     } else {
       setErrors(data.err[0]);
     }
-    console.log(data)
+  } catch (error) {
   }
+   }
 
   async function getCoupon() {
+    try {
     const token = localStorage.getItem("adminToken");
     const { data } = await axios.get(`/coupon/${location.state.couponId}`, { headers: { authorization: `Saja__${token}` } });
     setCoupon(data.coupon);
@@ -81,6 +83,8 @@ export default function UpdateCoupon() {
       amount: data.coupon.amount,
       expiredDate: data.coupon.expiredDate
     });
+  } catch (error) {
+  }
   }
 
   const handleFileChange = (e) => {
@@ -90,8 +94,7 @@ export default function UpdateCoupon() {
 
   useEffect(() => {
     getCoupon();
-    console.log(coupon);
-  }, []);
+   }, []);
 
   return (
     <>

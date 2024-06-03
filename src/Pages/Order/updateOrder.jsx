@@ -37,13 +37,12 @@ export default function UpdateOrder() {
                 setErrors([]);
                 toast.success("Order Updated successfully");
                 getOrder();
-                navigate('/')
+                navigate('/Orders')
             } else {
                 setErrors(data.err[0]);
             }
         } catch (error) {
-            console.error(error);
-            setStatusError(error.response.data.message);
+             setStatusError(error.response.data.message);
         }
     }
 
@@ -85,8 +84,7 @@ export default function UpdateOrder() {
                                             <label htmlFor="statusInput">Status </label>
                                             <select id="statusInput" name="status" className="form-select" value={formik.values.status} onChange={formik.handleChange}>
                                                 <option >Select Status</option>
-                                                <option value="confirmed">Confirmed</option>
-                                                <option value="delivered">Delivered</option>
+                                                 <option value="delivered">Delivered</option>
                                                 <option value="onWay">On Way</option>
                                             </select>
                                             {(statusError && statusError.includes('status')) ? <p className="alert alert-danger mt-2">{statusError}</p> : ''}

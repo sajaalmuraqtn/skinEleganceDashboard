@@ -9,8 +9,11 @@ export default function UserProfile() {
     const location = useLocation();
     async function getProfile() {
         const token = localStorage.getItem("adminToken");
-        const { data } = await axios.get(`/user/getSpecificUser/${location.state.userId}`, { headers: { authorization: `Saja__${token}` } });
-        setUser(data.user);
+        try {
+            const { data } = await axios.get(`/user/getSpecificUser/${location.state.userId}`, { headers: { authorization: `Saja__${token}` } });
+            setUser(data.user);
+        } catch (error) {
+        }
     }
     useEffect(() => {
         getProfile();

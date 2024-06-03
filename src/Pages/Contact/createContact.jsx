@@ -29,7 +29,7 @@ export default function CreateContact() {
 
   async function sendContactData(values) {
     const token = localStorage.getItem("adminToken");
-
+    try {
     let { data } = await axios.post('/contact/create', values, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
       setStatusError(err.response.data.message);
       console.error(err.response.data.message);
@@ -42,8 +42,9 @@ export default function CreateContact() {
     } else {
       setErrors(data.err[0]);
     }
-    console.log(data)
+  } catch (error) {
   }
+   }
 
 
   return (

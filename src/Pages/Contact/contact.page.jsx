@@ -6,23 +6,18 @@ import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
 
 export default function ContactsPage() {
-    const location = useLocation();
-    const navigate = useNavigate(); // Use useNavigate instead of useHistory
-
+     
     const [contacts, setContacts] = useState([]);
 
     const getContacts = async (url) => {
         try {
             const token = localStorage.getItem("adminToken");
             const { data } = await axios.get(`/contact/${url}`, { headers: { authorization: `Saja__${token}` } });
-            console.log(data);
-            if (data.message === "success") {
+             if (data.message === "success") {
                 setContacts(data.contacts);
-                console.log(contacts);
-            }
+             }
         } catch (error) {
-            console.log(error);
-        }
+         }
     };
 
     const deleteInvalidConfirm = async () => {
@@ -34,8 +29,7 @@ export default function ContactsPage() {
                 getContacts("getAllContacts")
             }
         } catch (error) {
-            console.log(error);
-        }
+         }
     };
 
     const deleteContact = async (contactId) => {

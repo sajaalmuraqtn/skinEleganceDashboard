@@ -22,8 +22,7 @@ export default function ProductDetails() {
                 setProduct(data.product);
             }
         } catch (error) {
-            console.log(error);
-        }
+         }
     };
 
     async function addToArchive(productId) {
@@ -53,13 +52,14 @@ export default function ProductDetails() {
 
 
     async function deleteProduct(productId) {
-        const token = localStorage.getItem("adminToken");
+        try {  const token = localStorage.getItem("adminToken");
         const { data } = await axios.delete(`/products/hardDelete/${productId}`, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
             return toast.error('Error While Archived');
         });
         if (data.message === 'success') {
             toast.success('Product Deleted Successfully')
             navigate('/Products');
+        } } catch (error) {
         }
     }
 

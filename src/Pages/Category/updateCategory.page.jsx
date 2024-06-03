@@ -46,7 +46,7 @@ export default function UpdateCategory() {
     }
 
     const token = localStorage.getItem("adminToken");
-
+    try {
     let { data } = await axios.put(`/catagories/${location.state.categoryId}`, formData, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
       setStatusError(err.response.data.message);
       console.error(err.response.data.message);
@@ -60,8 +60,9 @@ export default function UpdateCategory() {
     } else {
       setErrors(data.err[0]);
     }
-    console.log(data)
+  } catch (error) {
   }
+   }
 
 
   async function getCategory() {

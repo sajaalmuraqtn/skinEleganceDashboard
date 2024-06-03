@@ -33,11 +33,9 @@ export default function Product() {
             console.log(data);
             if (data.message === "success") {
                 setProducts(data.products);
-                console.log(products);
-            }
+             }
         } catch (error) {
-            console.log(error);
-        }
+         }
     };
     const getProducts = async (page) => {
         try {
@@ -50,8 +48,7 @@ export default function Product() {
                 console.log(products);
             }
         } catch (error) {
-            console.log(error);
-        }
+         }
     };
 
     useEffect(() => {
@@ -62,12 +59,9 @@ export default function Product() {
                 if (data && data.total) {
                     const totalPages = Math.ceil(data.total / 8); // Assuming 9 products per page
                     setTotalPages(totalPages);
-                } else {
-                    console.error('Invalid response data:', data);
-                }
+                } 
             }).catch(error => {
-                console.error('Error fetching products:', error);
-            });
+             });
         }
         else {
             getProducts(page).then(data => {

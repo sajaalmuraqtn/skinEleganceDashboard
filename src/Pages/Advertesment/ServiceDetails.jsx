@@ -29,8 +29,7 @@ export default function ServiceDetails() {
         const token = localStorage.getItem("adminToken");
         const { data } = await axios.patch(`/advertisement/${location.state.advertisementId}/services/softDelete/${serviceId}`, null, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
             toast.error('Error While Archived');
-            console.log(err);
-        });
+         });
         if (data.message === 'success') {
             toast.success('Service Archived Successfully')
             getService();
@@ -48,16 +47,14 @@ export default function ServiceDetails() {
                 getService();
             }
         } catch (error) {
-            // Handle axios request error
-            return toast.error('Advertisement not Available');
+             return toast.error('Advertisement not Available');
         }
     }
     async function deleteService(serviceId) {
         const token = localStorage.getItem("adminToken");
         const { data } = await axios.delete(`/advertisement/${location.state.advertisementId}/services/hardDelete/${serviceId}`, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
             toast.error('Error While Archived');
-            console.log(err);
-        });
+         });
         if (data.message === 'success') {
             toast.success('Service Deleted Successfully')
             navigate('/Advertisements');

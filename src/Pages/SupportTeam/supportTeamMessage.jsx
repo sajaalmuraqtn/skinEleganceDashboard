@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom'; // Import useNavigate instead of useHistory
 import Loading from '../../Components/Loading/Loading.jsx';
 import axios from 'axios';
@@ -26,21 +26,25 @@ export default function SupportTeamPage() {
         const token = localStorage.getItem("adminToken");
         searchQuery = `search=${searchQuery}`;
         const separator = '?'; // to put the sort and other filters method
-        const { data } = await axios.get(`/ContactSupport/${url}${separator}page=${page}&${searchQuery}`, { headers: { authorization: `Saja__${token}` } });
-        if (data.message === "success") {
-            setCont(data.contacts);
+        try {
+            const { data } = await axios.get(`/ContactSupport/${url}${separator}page=${page}&${searchQuery}`, { headers: { authorization: `Saja__${token}` } });
+            if (data.message === "success") {
+                setCont(data.contacts);
+            }
+        } catch (error) {
         }
     };
 
     const getSupportTeamMessages = async (page, url) => {
         const token = localStorage.getItem("adminToken");
         const separator = '?'; // to put the sort and other filters method
-        const { data } = await axios.get(`/ContactSupport/${url}${separator}page=${page}`, { headers: { authorization: `Saja__${token}` } });
-        console.log(data.contacts);
-        if (data.message === "success") {
-            setCont(data.contacts);
-            console.log(Cont);
-           
+        try {
+            const { data } = await axios.get(`/ContactSupport/${url}${separator}page=${page}`, { headers: { authorization: `Saja__${token}` } });
+            console.log(data.contacts);
+            if (data.message === "success") {
+                setCont(data.contacts);
+            }
+        } catch (error) {
         }
     };
 
@@ -133,13 +137,16 @@ export default function SupportTeamPage() {
                                     <div className="product-cell stock">Send At<button className="sort-button">
                                         <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" /></svg>
                                     </button></div>
+                                    <div className="product-cell price">Details<button className="sort-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" /></svg>
+                                    </button></div>
 
 
                                 </div>
 
                                 {(params.get('query') && Cont.length == 0) ? '' : <> {Cont.map((contact) => <div className="products-row mt-1">
                                     <div className="product-cell image">
-                                        <img src={contact?.createdByUser.image?.secure_url} alt="product" />
+                                        <img src={contact?.createdByUser.image?.secure_url} alt="Profile" />
                                         <Link to={`/Users/${contact.createdByUser?.slug}`} state={{ userId: contact.createdByUser?._id, slug: contact.createdByUser?.slug }} className='title'>{contact?.createdByUser.userName.split(' ').slice(0, 3).join(' ')}</Link>
                                     </div>
                                     <div className="product-cell category"><span className="cell-label">email:</span>{contact.email}</div>
@@ -150,6 +157,7 @@ export default function SupportTeamPage() {
                                         <span className={contact.replied ? "status active" : "status disabled"}>{contact.replied ? 'true' : 'false'}</span>
                                     </div>
                                     <div className="product-cell stock"><span className="cell-label"> CreatedAt:</span> {contact?.createdAt?.split('T')[0]}</div>
+                                    <div className="product-cell price"><Link className='btn' to={`/SupportTeamContact/${contact.createdByUser?.slug}`} state={{ contactId: contact._id }} >Details</Link></div>
 
                                 </div>)}</>}
                             </div>

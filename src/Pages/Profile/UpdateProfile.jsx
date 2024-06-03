@@ -51,7 +51,7 @@ export default function UpdateProfile() {
       formData.append('phoneNumber', values.phoneNumber);
     }
 
-
+    try {
     const token = localStorage.getItem("adminToken");
 
     let { data } = await axios.patch('/user/update', formData, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
@@ -66,8 +66,9 @@ export default function UpdateProfile() {
     } else {
       setErrors(data.err[0]);
     }
-    console.log(data)
+  } catch (error) {
   }
+   }
 
   async function getProfile() {
     const token = localStorage.getItem("adminToken");

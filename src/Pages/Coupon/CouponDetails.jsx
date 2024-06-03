@@ -10,43 +10,54 @@ export default function CouponDetails() {
     const [coupon, setCoupon] = useState(null);
     const { isCreatedThisMonth } = useContext(GlobalFunctionContext); // Access the context
     const location = useLocation();
-    let navigate=useNavigate();
+    let navigate = useNavigate();
     async function getCoupon() {
-        const token = localStorage.getItem("adminToken");
-        const { data } = await axios.get(`/coupon/${location.state.couponId}`, { headers: { authorization: `Saja__${token}` } });
-        setCoupon(data.coupon);
+        try {
+            const token = localStorage.getItem("adminToken");
+            const { data } = await axios.get(`/coupon/${location.state.couponId}`, { headers: { authorization: `Saja__${token}` } });
+            setCoupon(data.coupon);
+        } catch (error) {
+        }
     }
     async function addToArchive(couponId) {
-        const token = localStorage.getItem("adminToken");
-        const { data } = await axios.patch(`/coupon/softDelete/${couponId}`,null, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
-            toast.error('Error While Archived');
-            console.log(err);
-        });
-        if (data.message === 'success') {
-            toast.success('Coupon Archived Successfully')
-            getCoupon();
+        try {
+            const token = localStorage.getItem("adminToken");
+            const { data } = await axios.patch(`/coupon/softDelete/${couponId}`, null, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
+                toast.error('Error While Archived');
+            });
+            if (data.message === 'success') {
+                toast.success('Coupon Archived Successfully')
+                getCoupon();
+            }
+        } catch (error) {
         }
     }
     async function restoreCoupon(couponId) {
-        const token = localStorage.getItem("adminToken");
-        const { data } = await axios.patch(`/coupon/restore/${couponId}`,null, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
-            toast.error('Error While restoring');
-            console.log(err);
-        });
-        if (data.message === 'success') {
-            toast.success('Coupon Restored Successfully')
-            getCoupon();
+        try {
+            const token = localStorage.getItem("adminToken");
+            const { data } = await axios.patch(`/coupon/restore/${couponId}`, null, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
+                toast.error('Error While restoring');
+                console.log(err);
+            });
+            if (data.message === 'success') {
+                toast.success('Coupon Restored Successfully')
+                getCoupon();
+            }
+        } catch (error) {
         }
     }
     async function deleteCategory(couponId) {
-        const token = localStorage.getItem("adminToken");
-        const { data } = await axios.delete(`/coupon/hardDelete/${couponId}`, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
-            toast.error('Error While Archived');
-            console.log(err);
-        });
-        if (data.message === 'success') {
-            toast.success('Coupon Deleted Successfully')
-            navigate('/Coupons');
+        try {
+            const token = localStorage.getItem("adminToken");
+            const { data } = await axios.delete(`/coupon/hardDelete/${couponId}`, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
+                toast.error('Error While Archived');
+                console.log(err);
+            });
+            if (data.message === 'success') {
+                toast.success('Coupon Deleted Successfully')
+                navigate('/Coupons');
+            }
+        } catch (error) {
         }
     }
     useEffect(() => {
@@ -58,16 +69,16 @@ export default function CouponDetails() {
                 <meta charSet="utf-8" />
                 <title>SkinElegance|Coupons-{location.state.slug}</title>
             </Helmet>
-            < section className="app-container section-space" style={{marginTop:"-20px",marginBottom:'-140px'}} >
+            < section className="app-container section-space" style={{ marginTop: "-20px", marginBottom: '-140px' }} >
                 <div className="container">
-                 {!coupon ? (
+                    {!coupon ? (
                         <Loading margin={200} height={120} fontSize={70} />
                     ) : <>
                         <div className="row product-details">
                             <div className="col-lg-5">
                                 <div className="product-details-thumb">
                                     <img src={coupon.image.secure_url} width={440} height={553} alt="Image" />
-                                    {isCreatedThisMonth(coupon.createdAt) && (<span className="flag-new " style={{backgroundColor:'red'}}>new</span>)}
+                                    {isCreatedThisMonth(coupon.createdAt) && (<span className="flag-new " style={{ backgroundColor: 'red' }}>new</span>)}
 
                                 </div>
                             </div>
@@ -84,10 +95,10 @@ export default function CouponDetails() {
                                                 <span className={!coupon.isDeleted ? "status active fs-5" : "status disabled fs-5"}>{coupon.isDeleted ? 'true' : 'false'}</span></label>
                                         </div>
                                         {!coupon.isDeleted ? <button type="button" className="btn bg-danger bg-gradient" style={{ marginLeft: '10px' }} onClick={() => addToArchive(coupon._id)} >Archive </button>
-                                        : <div className='mt-3 row'>
-                                            <button type="button" className="btn bg-success bg-gradient col-md-4" style={{ marginLeft: '10px' }} onClick={() => restoreCoupon(coupon._id)} >Restore </button>
-                                            <button type="button" className="btn bg-danger bg-gradient col-md-4" style={{ marginLeft: '10px' }} onClick={() => deleteCategory(coupon._id)} >Delete</button>
-                                        </div>}
+                                            : <div className='mt-3 row'>
+                                                <button type="button" className="btn bg-success bg-gradient col-md-4" style={{ marginLeft: '10px' }} onClick={() => restoreCoupon(coupon._id)} >Restore </button>
+                                                <button type="button" className="btn bg-danger bg-gradient col-md-4" style={{ marginLeft: '10px' }} onClick={() => deleteCategory(coupon._id)} >Delete</button>
+                                            </div>}
                                     </div>
 
                                     <div className="product-details-action">
@@ -109,8 +120,8 @@ export default function CouponDetails() {
                                             </li>
                                         </ul>
                                     </div>
-                                    <Link className="btn bg-info" to={`/Coupons/Update/${coupon.slug}`} state={{ couponId: coupon._id,slug:coupon.slug  }} >Update <i className="fa-solid fa-gear"></i></Link>
-                                   
+                                    <Link className="btn bg-info" to={`/Coupons/Update/${coupon.slug}`} state={{ couponId: coupon._id, slug: coupon.slug }} >Update <i className="fa-solid fa-gear"></i></Link>
+
                                 </div>
                             </div>
 

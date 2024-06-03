@@ -56,8 +56,7 @@ export default function CreateCoupon() {
             console.log(data);
         } catch (error) {
             setStatusError(error.response.data.message);
-            console.error(error.response.data.message);
-        }
+         }
     }
 
     return (

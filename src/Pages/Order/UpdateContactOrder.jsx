@@ -18,8 +18,7 @@ export default function UpdateContactOrder() {
         const token = localStorage.getItem("adminToken");
         const { data } = await axios.get(`/order/${location.state.orderId}`, { headers: { authorization: `Saja__${token}` } });
         setOrder(data.order);
-        console.log(data.order)
-        formik.setValues({
+         formik.setValues({
             contactId: data.order?.contact?._id || ''
         });
     }
@@ -31,12 +30,10 @@ export default function UpdateContactOrder() {
             console.log(data);
             if (data.message === "success") {
                 setContacts(data.contacts);
-                console.log(contacts);
-
+ 
             }
         } catch (error) {
-            console.log(error);
-        }
+         }
     };
     const schema = Yup.object().shape({
         contactId: Yup.string().required("Contact is required")
@@ -66,8 +63,7 @@ export default function UpdateContactOrder() {
                 setErrors(data.err[0]);
             }
         } catch (error) {
-            console.error(error);
-            setStatusError(error.response.data.message);
+             setStatusError(error.response.data.message);
         }
     }
 

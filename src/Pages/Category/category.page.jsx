@@ -30,14 +30,11 @@ export default function CategoryPage() {
             const token = localStorage.getItem("adminToken");
             const separator = '?'; // to put the sort and other filters method
             const { data } = await axios.get(`/catagories${separator}page=${page}&${searchQuery}`, { headers: { authorization: `Saja__${token}` } });
-            console.log(data);
-            if (data.message === "success") {
+             if (data.message === "success") {
                 setCategories(data.categories);
-                console.log(categories);
-            }
+             }
         } catch (error) {
-            console.log(error);
-        }
+         }
     };
     const getCategories = async (page) => {
         try {

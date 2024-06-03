@@ -17,13 +17,11 @@ export default function CardDetails() {
         return navigate("/Login");
       }
       const { data } = await axios.get(`/order/${location.state.orderId}`, { headers: { authorization: `Saja__${token}` } });
-      console.log(data);
-      if (data.message === "success") {
+       if (data.message === "success") {
          setCardDetails(data.order.cardDetails);
        }
     } catch (error) {
-      console.log(error);
-    }
+     }
   };
   useEffect(() => {
     getOrder();

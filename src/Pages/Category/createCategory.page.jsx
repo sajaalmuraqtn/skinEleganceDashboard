@@ -41,7 +41,7 @@ export default function CreateCategory() {
         formData.append('status', values.status);
 
         const token = localStorage.getItem("adminToken");
-
+        try {
         let { data } = await axios.post('/catagories/create', formData, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
             setStatusError(err.response.data.message);
             console.error(err.response.data.message);
@@ -54,7 +54,8 @@ export default function CreateCategory() {
         } else {
             setErrors(data.err[0]);
         }
-        console.log(data)
+    } catch (error) {
+    }
     }
 
 

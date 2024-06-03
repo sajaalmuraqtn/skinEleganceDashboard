@@ -15,8 +15,11 @@ export default function CreateProduct() {
     const [advertisement, setAdvertisement] = useState(null);
     async function getAdvertisement() {
         const token = localStorage.getItem("adminToken");
+        try {
         const { data } = await axios.get(`/advertisement/${location.state.advertisementId}`, {}, { headers: { authorization: `Saja__${token}` } });
         setAdvertisement(data.advertisement);
+    } catch (error) {
+    }
     }
 
     // Define the validation schema using Yup

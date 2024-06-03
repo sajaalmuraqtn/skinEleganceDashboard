@@ -31,25 +31,20 @@ export default function AdvertisementPage() {
             console.log(data);
             if (data.message === "success") {
                 setAdvertisements(data.advertisements);
-                console.log(advertisements);
-            }
+             }
         } catch (error) {
-            console.log(error);
-        }
+         }
     };
     const getAdvertisements = async (page) => {
         try {
             const token = localStorage.getItem("adminToken");
             const separator = '?'; // to put the sort and other filters method
             const { data } = await axios.get(`/advertisement${separator}page=${page}`, { headers: { authorization: `Saja__${token}` } });
-            console.log(data);
-            if (data.message === "success") {
+             if (data.message === "success") {
                 setAdvertisements(data.advertisements);
-                console.log(advertisements);
-            }
+             }
         } catch (error) {
-            console.log(error);
-        }
+         }
     };
 
     useEffect(() => {

@@ -90,8 +90,7 @@ export default function UpdateProduct() {
         setErrors(data.err[0]);
       }
     } catch (error) {
-      console.error(error);
-      setStatusError(error.response.data.message);
+       setStatusError(error.response.data.message);
     }
   }
 

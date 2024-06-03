@@ -14,19 +14,25 @@ export default function CategoryDetails() {
 
     async function getCategory() {
         const token = localStorage.getItem("adminToken");
+        try {
         const { data } = await axios.get(`/catagories/${location.state.categoryId}`, {}, { headers: { authorization: `Saja__${token}` } });
         setCategory(data.category);
+    } catch (error) {
+    }
     }
 
     async function addToArchive(categoryId) {
         const token = localStorage.getItem("adminToken");
-        const { data } = await axios.put(`/catagories/softDelete/${categoryId}`, null, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
-            toast.error('Error While Archived');
-            console.log(err);
-        });
-        if (data.message === 'success') {
-            toast.success('Category Archived Successfully')
-            getCategory();
+        try {
+            const { data } = await axios.put(`/catagories/softDelete/${categoryId}`, null, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
+                toast.error('Error While Archived');
+                console.log(err);
+            });
+            if (data.message === 'success') {
+                toast.success('Category Archived Successfully')
+                getCategory();
+            }
+        } catch (error) {
         }
     }
     async function restoreCategory(categoryId) {

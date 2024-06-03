@@ -32,8 +32,7 @@ import UpdateProfile from './Pages/Profile/UpdateProfile.jsx';
 import Profile from './Pages/Profile/Profile.jsx';
 import UpdatePassword from './Pages/ForgotPassword/UpdatePassword.jsx';
 import ResetPassword from './Pages/ForgotPassword/ResetPassword.jsx';
-import SetCode from './Pages/ForgotPassword/SetCode.jsx';
-import Orders from './Pages/Order/Orders.jsx';
+ import Orders from './Pages/Order/Orders.jsx';
 import CategoryPage from './Pages/Category/category.page.jsx';
 import CouponPage from './Pages/Coupon/coupon.page.jsx';
 import UsersPage from './Pages/Users/Users.page.jsx';
@@ -114,8 +113,7 @@ function App() {
       { path: 'ForgotPassword', element: <AuthContextProvider><ForgotPassword /></AuthContextProvider> },
       { path: 'UpdatePassword', element: <AuthContextProvider><ProtectedRouter><UpdatePassword /></ProtectedRouter></AuthContextProvider> },
       { path: 'ResetPassword', element: <AuthContextProvider><ResetPassword /></AuthContextProvider> },
-      { path: 'SetCode', element: <AuthContextProvider><SetCode /></AuthContextProvider> },
-      { path: 'Login', element: <Login /> },
+       { path: 'Login', element: <Login /> },
       { path: 'Register', element: <AuthContextProvider> <Register /></AuthContextProvider> },
       { path: '*', element: <NotFound title={'Opps! You Lost'} titlePage={'Home'} goTO={''} /> },
     ]

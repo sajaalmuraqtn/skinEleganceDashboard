@@ -14,41 +14,52 @@ export default function AdvertisementDetails() {
 
     async function getAdvertisement() {
         const token = localStorage.getItem("adminToken");
-        const { data } = await axios.get(`/advertisement/admin/${location.state.advertisementId}`, { headers: { authorization: `Saja__${token}` } });
-        setAdvertisement(data.advertisement);
+        try {
+            const { data } = await axios.get(`/advertisement/admin/${location.state.advertisementId}`, { headers: { authorization: `Saja__${token}` } });
+            setAdvertisement(data.advertisement);
+        } catch (error) {
+        }
     }
 
     async function addToArchive(advertisementId) {
         const token = localStorage.getItem("adminToken");
-        const { data } = await axios.patch(`/advertisement/softDelete/${advertisementId}`, null, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
-            toast.error('Error While Archived');
-            console.log(err);
-        });
-        if (data.message === 'success') {
-            toast.success('Advertisement Archived Successfully')
-            getAdvertisement();
+        try {
+            const { data } = await axios.patch(`/advertisement/softDelete/${advertisementId}`, null, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
+                toast.error('Error While Archived');
+                console.log(err);
+            });
+            if (data.message === 'success') {
+                toast.success('Advertisement Archived Successfully')
+                getAdvertisement();
+            }
+        } catch (error) {
         }
     }
     async function restoreAdvertisement(advertisementId) {
         const token = localStorage.getItem("adminToken");
-        const { data } = await axios.patch(`/advertisement/restore/${advertisementId}`, null, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
-            toast.error('Error While restoring');
-            console.log(err);
-        });
-        if (data.message === 'success') {
-            toast.success('Advertisement Restored Successfully')
-            getAdvertisement();
+        try {
+            const { data } = await axios.patch(`/advertisement/restore/${advertisementId}`, null, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
+                toast.error('Error While restoring');
+                console.log(err);
+            });
+            if (data.message === 'success') {
+                toast.success('Advertisement Restored Successfully')
+                getAdvertisement();
+            }
+        } catch (error) {
         }
     }
     async function deleteAdvertisement(advertisementId) {
         const token = localStorage.getItem("adminToken");
-        const { data } = await axios.delete(`/advertisement/hardDelete/${advertisementId}`, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
-            toast.error('Error While Archived');
-            console.log(err);
-        });
-        if (data.message === 'success') {
-            toast.success('Advertisement Deleted Successfully')
-            navigate('/Advertisements');
+        try {
+            const { data } = await axios.delete(`/advertisement/hardDelete/${advertisementId}`, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
+                toast.error('Error While Archived');
+            });
+            if (data.message === 'success') {
+                toast.success('Advertisement Deleted Successfully')
+                navigate('/Advertisements');
+            }
+        } catch (error) {
         }
     }
 
@@ -114,18 +125,18 @@ export default function AdvertisementDetails() {
                                             <li><span>Expired Date</span>
                                                 <p>{advertisement.expiredDate.split('T')[0]}</p>
                                             </li>
-                                        <div className='social-Media'>
-                                            <i class="fa-solid fa-phone fa-2xl" style={{ color: '#3ee302' }}></i>
-                                            <span className='fs-4'> {advertisement?.phoneNumber}</span>
-                                        </div>
-                                        {advertisement?.facebookLink!=='-' ? <div className='social-Media'>
-                                            <i class="fa-brands fa-facebook fa-2xl" style={{ color: '#007fe0' }}></i>
-                                            <a href={advertisement?.facebookLink} className='fs-4'> {advertisement.slug}</a>
-                                        </div> : ''}
-                                        {advertisement?.instagramLink!=='-'? <div className='social-Media'>
-                                            <i class="fa-brands fa-instagram fa-2xl" style={{ color: '#f702aa' }}></i>
-                                            <a href={advertisement?.instagramLink} className='fs-4'> {advertisement.slug}</a>
-                                        </div> : ''}
+                                            <div className='social-Media'>
+                                                <i class="fa-solid fa-phone fa-2xl" style={{ color: '#3ee302' }}></i>
+                                                <span className='fs-4'> {advertisement?.phoneNumber}</span>
+                                            </div>
+                                            {advertisement?.facebookLink !== '-' ? <div className='social-Media'>
+                                                <i class="fa-brands fa-facebook fa-2xl" style={{ color: '#007fe0' }}></i>
+                                                <a href={advertisement?.facebookLink} className='fs-4'> {advertisement.slug}</a>
+                                            </div> : ''}
+                                            {advertisement?.instagramLink !== '-' ? <div className='social-Media'>
+                                                <i class="fa-brands fa-instagram fa-2xl" style={{ color: '#f702aa' }}></i>
+                                                <a href={advertisement?.instagramLink} className='fs-4'> {advertisement.slug}</a>
+                                            </div> : ''}
                                         </ul>
                                     </div>
                                     <Link className="btn bg-info" style={{ marginRight: '20px' }} to={`/Advertisements/Update/${advertisement.slug}`} state={{ advertisementId: advertisement._id, slug: advertisement.slug }} >Update <i className="fa-solid fa-gear"></i></Link>

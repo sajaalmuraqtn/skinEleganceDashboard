@@ -10,8 +10,7 @@ export default function Orders() {
     const queryParams = new URLSearchParams(location.search);
     const pageFromURL = queryParams.get('page');
     const [page, setPage] = useState(parseInt(pageFromURL) || 1);
-    const [selectedProduct, setSelectedProduct] = useState(null); // State variable to track the selected product
-    const navigate = useNavigate(); // Use useNavigate instead of useHistory
+     const navigate = useNavigate(); // Use useNavigate instead of useHistory
 
     const [totalPages, setTotalPages] = useState(0);
     // Use array destructuring to get the state variable and the function to update it
@@ -29,28 +28,22 @@ export default function Orders() {
             const token = localStorage.getItem("adminToken");
             const separator = '?'; // to put the sort and other filters method
             const { data } = await axios.get(`/order${separator}page=${page}&${searchQuery}`, { headers: { authorization: `Saja__${token}` } });
-            console.log(data);
-            if (data.message === "success") {
+             if (data.message === "success") {
                 setOrders(data.orders);
-                console.log(orders);
-            }
+             }
         } catch (error) {
-            console.log(error);
-        }
+         }
     };
     const getOrders = async (page) => {
         try {
             const token = localStorage.getItem("adminToken");
             const separator = '?'; // to put the sort and other filters method
             const { data } = await axios.get(`/order${separator}page=${page}`, { headers: { authorization: `Saja__${token}` } });
-            console.log(data);
-            if (data.message === "success") {
+             if (data.message === "success") {
                 setOrders(data.orders);
-                console.log(orders);
-            }
+             }
         } catch (error) {
-            console.log(error);
-        }
+         }
     };
 
     useEffect(() => {
@@ -62,16 +55,14 @@ export default function Orders() {
                 setTotalPages(totalPages);
 
             }).catch(error => {
-                console.error('Error fetching products:', error);
-            });
+             });
         } else {
             getOrders(page).then(data => {
                 const totalPages = Math.ceil(data.total / 8); // Assuming 9 products per page
                 setTotalPages(totalPages);
 
             }).catch(error => {
-                console.error('Error fetching products:', error);
-            });
+             });
         }
 
 

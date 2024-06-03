@@ -33,24 +33,29 @@ export default function UsersPage() {
                 setWebUsers(data.users);
             }
         } catch (error) {
-            console.log(error);
         }
     };
     const getUsers = async (page, url) => {
-            const token = localStorage.getItem("adminToken");
-            const separator = '?'; // to put the sort and other filters method
+        const token = localStorage.getItem("adminToken");
+        const separator = '?'; // to put the sort and other filters method
+        try {
             const { data } = await axios.get(`/user/${url}${separator}page=${page}`, { headers: { authorization: `Saja__${token}` } });
             if (data.message === "success") {
                 setWebUsers(data.users);
             }
+        } catch (error) {
+        }
     };
     const deleteInvalidConfirm = async () => {
-            const token = localStorage.getItem("adminToken");
+        const token = localStorage.getItem("adminToken");
+        try {
             const { data } = await axios.delete(`/auth/deleteInvalidConfirm`, { headers: { authorization: `Saja__${token}` } });
             if (data.message === "success") {
                 toast.success('Unconfirmed Users Deleted Successfully')
                 getUsers(page, "getAllUsers")
             }
+        } catch (error) {
+        }
     };
 
     useEffect(() => {
@@ -62,7 +67,6 @@ export default function UsersPage() {
                     const totalPages = Math.ceil(data.total / 9); // Assuming 9 products per page
                     setTotalPages(totalPages);
                 } else {
-                    console.error('Invalid response data:', data);
                 }
             });
         }
@@ -72,7 +76,6 @@ export default function UsersPage() {
                     const totalPages = Math.ceil(data.total / 9); // Assuming 9 products per page
                     setTotalPages(totalPages);
                 } else {
-                    console.error('Invalid response data:', data);
                 }
             });
         }
@@ -153,7 +156,7 @@ export default function UsersPage() {
                                 {(params.get('query') && webUsers.length == 0) ? '' : <> {webUsers.map((user) => <div className="products-row mt-1">
                                     <div className="product-cell image">
                                         <img src={user?.image?.secure_url} alt="product" />
-                                        <Link to={`/Users/${user.slug}`} state={{ userId: user._id,slug:user.slug }} className='title'>{user?.userName.split(' ').slice(0, 3).join(' ')}</Link>
+                                        <Link to={`/Users/${user.slug}`} state={{ userId: user._id, slug: user.slug }} className='title'>{user?.userName.split(' ').slice(0, 3).join(' ')}</Link>
                                     </div>
                                     <div className="product-cell category"><span className="cell-label">email:</span>{user.email}</div>
                                     <div className="product-cell status-cell">

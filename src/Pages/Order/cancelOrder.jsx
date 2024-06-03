@@ -20,13 +20,11 @@ export default function CancelOrder() {
         try {
             const token = localStorage.getItem('adminToken');
             const { data } = await axios.get(`/order/${location.state.orderId}`, { headers: { authorization: `Saja__${token}` } });
-            console.log(data);
-            if (data.message === "success") {
+             if (data.message === "success") {
                 setOrder(data.order);
             }
         } catch (error) {
-            console.log(error);
-            setStatusError(error.response.data.message)
+             setStatusError(error.response.data.message)
         }
     };
 
@@ -39,8 +37,7 @@ export default function CancelOrder() {
         const { data } = await axios.patch(`/order/cancel/${location.state.orderId}`, values, { headers: { authorization: `Saja__${token}` } }).catch((err) => {
             setStatusError(err.response.data.message);
         });
-        console.log(data);
-        if (data.message === "success") {
+         if (data.message === "success") {
             setOrder(data.order);
             getOrder();
             toast.success('Order Canceled successfully')

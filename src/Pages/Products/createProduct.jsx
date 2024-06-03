@@ -20,8 +20,7 @@ export default function CreateProduct() {
                 setCategories(data.activeCatagories);
             }
         } catch (error) {
-            console.log(error);
-        }
+         }
     };
     // Define the validation schema using Yup
     const schema = Yup.object().shape({
@@ -91,8 +90,7 @@ export default function CreateProduct() {
             }
         } catch (error) {
             setStatusError(error.response.data.message);
-            console.error(error.response.data.message);
-        }
+         }
     }
 
     useEffect(() => {

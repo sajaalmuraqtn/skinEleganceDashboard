@@ -30,8 +30,7 @@ export default function ForgotPassword() {
     try {
       const response = await axios.patch('/auth/sendCode', values);
       const { data } = response;
-      console.log(data.message);
-      if (data.message === "success") {
+       if (data.message === "success") {
         toast("code send check your email");
         navigate('/ResetPassword');
       } else {

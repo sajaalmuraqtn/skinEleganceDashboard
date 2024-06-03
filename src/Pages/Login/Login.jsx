@@ -34,13 +34,11 @@ export default function Login() {
     try {
       const response = await axios.post('/auth/adminSignIn', values);
       const { data } = response;
-      console.log(data.message);
-      if (data.message === "success") {
+       if (data.message === "success") {
         localStorage.setItem('adminToken', data.token);
         getProfile();
         navigate('/');
-        console.log(user);
-      } else {
+       } else {
         setErrors(data.err[0]);
       }
     } catch (err) {

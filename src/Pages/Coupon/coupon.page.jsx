@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { GlobalFunctionContext } from '../../Context/globalFunctionsContext.jsx';
-import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom'; // Import useNavigate instead of useHistory
+ import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom'; // Import useNavigate instead of useHistory
 import Loading from '../../Components/Loading/Loading.jsx';
 import axios from 'axios';
 import { Helmet } from 'react-helmet';
@@ -10,9 +9,7 @@ export default function CouponPage() {
     const queryParams = new URLSearchParams(location.search);
     const pageFromURL = queryParams.get('page');
     const [page, setPage] = useState(parseInt(pageFromURL) || 1);
-    const [selectedProduct, setSelectedProduct] = useState(null); // State variable to track the selected product
-    const { isCreatedThisMonth, selectRandomColor } = useContext(GlobalFunctionContext);
-    const navigate = useNavigate(); // Use useNavigate instead of useHistory
+     const navigate = useNavigate(); // Use useNavigate instead of useHistory
 
     const [totalPages, setTotalPages] = useState(0);
     // Use array destructuring to get the state variable and the function to update it
@@ -30,14 +27,11 @@ export default function CouponPage() {
             const token = localStorage.getItem("adminToken");
             const separator = '?'; // to put the sort and other filters method
             const { data } = await axios.get(`/coupon${separator}page=${page}&${searchQuery}`, { headers: { authorization: `Saja__${token}` } });
-            console.log(data);
-            if (data.message === "success") {
+             if (data.message === "success") {
                 setCoupons(data.coupons);
-                console.log(coupons);
-            }
+             }
         } catch (error) {
-            console.log(error);
-        }
+         }
     };
     const getCoupons = async (page) => {
         try {
@@ -47,11 +41,9 @@ export default function CouponPage() {
             console.log(data);
             if (data.message === "success") {
                 setCoupons(data.coupons);
-                console.log(coupons);
-            }
+             }
         } catch (error) {
-            console.log(error);
-        }
+         }
     };
 
     useEffect(() => {
@@ -63,24 +55,18 @@ export default function CouponPage() {
                 if (data && data.total) {
                     const totalPages = Math.ceil(data.total / 9); // Assuming 9 products per page
                     setTotalPages(totalPages);
-                } else {
-                    console.error('Invalid response data:', data);
-                }
+                }  
             }).catch(error => {
-                console.error('Error fetching products:', error);
-            });
+             });
         }
         else {
             getCoupons(page).then(data => {
                 if (data && data.total) {
                     const totalPages = Math.ceil(data.total / 9); // Assuming 9 products per page
                     setTotalPages(totalPages);
-                } else {
-                    console.error('Invalid response data:', data);
-                }
+                }  
             }).catch(error => {
-                console.error('Error fetching products:', error);
-            });
+             });
         }
     }, [page, params]);
 
