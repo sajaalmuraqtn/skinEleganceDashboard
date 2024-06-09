@@ -18,7 +18,7 @@ export default function UpdateCoupon() {
   const location = useLocation();
   // Define the validation schema using Yup
   const schema = Yup.object({
-    name: Yup.string().min(3, "Minimum characters is 3").max(40, "Maximum characters is 40"),
+    name: Yup.string().min(3, "Minimum characters is 3").max(40, "Maximum characters is 40") ,
     amount: Yup.number().positive("Amount must be positive"),
     file: Yup.mixed(), // Accept any file type
     expiredDate: Yup.date().min(new Date(), "Expired date must be in the future"),

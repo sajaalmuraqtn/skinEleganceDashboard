@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import textThemeSlider from '../../assets/register_login.png';
 import { AuthContext } from '../../Context/Auth.context.jsx';
 import { useFormik } from 'formik';
@@ -11,13 +11,14 @@ export default function Login() {
   // Use array destructuring to get the state variable and the function to update it
   let [errors, setErrors] = useState([]);
   let [statusError, setStatusError] = useState('');
-  let navigate = useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
   const { getProfile, user } = useContext(AuthContext);
 
   let schema = Yup.object(
     {
       email: Yup.string().required("email is required").email("email invalid"),
-      password: Yup.string().min(10, "minimum characters is 10").max(15, "maximum characters is 15")
+      password: Yup.string().required("password is required")
     }
   )
 
@@ -34,18 +35,22 @@ export default function Login() {
     try {
       const response = await axios.post('/auth/adminSignIn', values);
       const { data } = response;
-       if (data.message === "success") {
+      if (data.message === "success") {
         localStorage.setItem('adminToken', data.token);
         getProfile();
         navigate('/');
-       } else {
+      } else {
         setErrors(data.err[0]);
       }
     } catch (err) {
       setStatusError(err.response.data.message);
     }
   }
-
+  useEffect(() => {
+    if (localStorage.getItem("adminToken") &&( location.pathname === '/Login'||location.pathname === '/login')) {
+      navigate('/');
+    }
+  }, []);
   return (
     <>
       <Helmet>

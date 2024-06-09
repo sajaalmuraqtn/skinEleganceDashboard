@@ -37,7 +37,8 @@ export default function CardDetails() {
       {/*== Start Product Area Wrapper ==*/}
       {!cardDetails ? <Loading height={100} fontSize={70} width={1200} /> : <section className="app-container section-space" style={{ marginTop: "-150px",height:'120vh' }} >
 
-        <> <div className="container row">
+        <>
+         <div className="container row">
           <div className="app-content-header">
             <h1 className="app-content-headerText">Card Details</h1>
 
@@ -58,6 +59,12 @@ export default function CardDetails() {
                     <th> Holder Name</th>
                     <td>
                       <p className="destination"><strong>{cardDetails.cardholderName} </strong>.</p>
+                    </td>
+                  </tr>
+                  <tr className="shipping-totals">
+                    <th> Card Number</th>
+                    <td>
+                      <p className="destination"><strong>{cardDetails.cardNumber} </strong>.</p>
                     </td>
                   </tr>
                   <tr className="shipping-totals">

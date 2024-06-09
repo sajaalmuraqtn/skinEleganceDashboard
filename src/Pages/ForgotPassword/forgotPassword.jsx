@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import textThemeSlider from '../../assets/register_login.png'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup'; // Import Yup as a whole module
@@ -11,7 +11,7 @@ export default function ForgotPassword() {
   let [errors, setErrors] = useState([]);
   let [statusError, setStatusError] = useState('');
   let navigate = useNavigate();
-
+  const location = useLocation();
   let schema = Yup.object(
     {
       email: Yup.string().required("email is required").email("email invalid"),
@@ -40,13 +40,19 @@ export default function ForgotPassword() {
       setStatusError(err.response.data.message);
     }
   }
+  useEffect(() => {
+    if (localStorage.getItem("adminToken") &&( location.pathname === '/ForgotPassword'||location.pathname === '/forgotPassword')) {
+      navigate('/');
+    }
+  }, []);
+
   return (
     <>
       <Helmet>
         <meta charSet="utf-8" />
         <title>SkinElegance|ForgotPassword</title>
       </Helmet>
-      <section className="section-space" style={{ height: '100vh' }}>
+      <section className="section-space w-100" style={{ height: '100vh' }}>
         <div className="container">
           <div className="row mb-n8" style={{ marginTop: '50px' }}>
             {/* Start Skin Elegance Section */}

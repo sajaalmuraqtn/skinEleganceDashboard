@@ -6,7 +6,7 @@ export default function SideBarComponent({ user, LogOut }) {
   let location = useLocation();
   return (
     <>
-      <div className="sidebar">
+      <div className="sidebar ">
         <Link className="sidebar-header" state={{slug:user.slug}} to={'Profile'}>
           <div className="account-info-picture">
             <img src={user.image.secure_url} alt="Account" />

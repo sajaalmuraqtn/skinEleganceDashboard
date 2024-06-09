@@ -28,8 +28,10 @@ export default function AdvertisementPage() {
             const token = localStorage.getItem("adminToken");
             const separator = '?'; // to put the sort and other filters method
             const { data } = await axios.get(`/advertisement${separator}page=${page}&${searchQuery}`, { headers: { authorization: `Saja__${token}` } });
-            console.log(data);
             if (data.message === "success") {
+                if (data.advertisements.length===0) {
+                    navigate('/Advertisements/Add')
+                }
                 setAdvertisements(data.advertisements);
              }
         } catch (error) {

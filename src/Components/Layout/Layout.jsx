@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import Navbar from '../Navbar/Navbar';
-import { Outlet } from 'react-router-dom';
-import Footer from '../Footer/Footer';
+import { Outlet, useLocation } from 'react-router-dom';
 import logo from '../../assets/logo.png'
 import { AuthContext, AuthContextProvider } from '../../Context/Auth.context.jsx';
 import { useNavigate } from "react-router-dom";
@@ -10,7 +9,6 @@ import SideBarComponent from '../SideBar/SideBar.Component.jsx';
 
 export default function Layout() {
   const { getProfile, user, setUser } = useContext(AuthContext);
-
   let navigate = useNavigate()
   function LogOut() {
     setUser(null);
@@ -22,6 +20,7 @@ export default function Layout() {
     if (localStorage.getItem("adminToken")) {
       getProfile()
     }
+    
   }, [])
 
   return (
@@ -29,7 +28,7 @@ export default function Layout() {
    { !user?
       <Navbar   logo={logo} />
       :<SideBarComponent user={user} LogOut={LogOut} logo={logo}/>}
-      <Outlet>
+      <Outlet >
 
       </Outlet>
     </>

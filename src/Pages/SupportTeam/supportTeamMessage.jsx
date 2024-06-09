@@ -14,6 +14,10 @@ export default function SupportTeamPage() {
     const [totalPages, setTotalPages] = useState(0);
     // Use array destructuring to get the state variable and the function to update it
     const [Cont, setCont] = useState([]);
+    const [readdContacts, setReaddContacts] = useState(0);
+    const [unReaddContacts, setUnReaddContacts] = useState(0);
+    const [SupportContacts, setSupportContacts] = useState(0);
+    const [RequestContacts, setRequestContacts] = useState(0);
     const [params, setParams] = useSearchParams();
 
     const handleSearch = (e) => {
@@ -40,9 +44,12 @@ export default function SupportTeamPage() {
         const separator = '?'; // to put the sort and other filters method
         try {
             const { data } = await axios.get(`/ContactSupport/${url}${separator}page=${page}`, { headers: { authorization: `Saja__${token}` } });
-            console.log(data.contacts);
             if (data.message === "success") {
                 setCont(data.contacts);
+                setReaddContacts(data.readdContacts);
+                setRequestContacts(data.RequestContacts);
+                setSupportContacts(data.SupportContacts);
+                setUnReaddContacts(data.unReaddContacts);
             }
         } catch (error) {
         }
@@ -105,6 +112,12 @@ export default function SupportTeamPage() {
                                     type="search"
                                     name="search"
                                     placeholder='Search on Users  (UserName, email, ....)' />
+                                <div className='d-flex'>
+                                    <span style={{ marginRight: '20px', backgroundColor: 'rgba(0, 140, 255, 0.623)', marginLeft: '20px', borderRadius: "3px", color: "black" }} className='p-1 px-2'>Readd Message : {readdContacts} </span>
+                                    <span style={{ marginRight: '20px', backgroundColor: 'rgba(255, 0, 187, 0.623)', borderRadius: "3px", color: "black" }} className='p-1 px-2'>Un Readd Message : {unReaddContacts} </span>
+                                    <span style={{ marginRight: '20px', backgroundColor: 'rgba(251, 255, 0, 0.623)', borderRadius: "3px", color: "black" }} className='p-1 px-2'>Support Message : {SupportContacts} </span>
+                                    <span style={{ marginRight: '20px', backgroundColor: 'rgba(21, 255, 0, 0.623)', borderRadius: "3px", color: "black" }} className='p-1 px-2'>Request Message : {RequestContacts} </span>
+                                </div>
                                 <div className="app-content-actions-wrapper">
                                     <div className="filter-button-wrapper">
 

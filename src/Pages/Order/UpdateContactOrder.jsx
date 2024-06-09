@@ -55,10 +55,12 @@ export default function UpdateContactOrder() {
 
             let { data } = await axios.patch(`/order/addContact/${location.state.orderId}`, values, { headers: { authorization: `Saja__${token}` } });
             if (data.message === "success") {
+                toast.success("Contact Added successfully");
                 setStatusError('');
                 setErrors([]);
-                toast.success("Contact Added successfully");
-                navigate('/')
+                getOrder()
+                navigate('/Orders')
+
             } else {
                 setErrors(data.err[0]);
             }

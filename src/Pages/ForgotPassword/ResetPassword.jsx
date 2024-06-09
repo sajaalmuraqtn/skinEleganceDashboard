@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import textThemeSlider from '../../assets/register_login.png'
-import { AuthContext } from '../../Context/Auth.context.jsx';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'; // Import Yup as a whole module
 import axios from 'axios';
@@ -12,9 +11,8 @@ export default function ResetPassword() {
   // Use array destructuring to get the state variable and the function to update it
   let [errors, setErrors] = useState([]);
   let [statusError, setStatusError] = useState('');
-  let navigate = useNavigate();
-  const { getProfile, user } = useContext(AuthContext);
-
+  const location = useLocation();
+  const navigate = useNavigate();
   let schema = Yup.object(
     {
       code: Yup.string().required("Code is required"),
@@ -39,11 +37,9 @@ export default function ResetPassword() {
     try {
       const response = await axios.patch('/auth/forgotPassword', values);
       const { data } = response;
-      console.log(data.message);
       if (data.message === "success") {
         toast("Password Reset successfully");
         navigate('/Login');
-
       } else {
         setErrors(data.err[0]);
       }
@@ -51,14 +47,18 @@ export default function ResetPassword() {
       setStatusError(err.response.data.message);
     }
   }
-
+  useEffect(() => {
+    if (localStorage.getItem("adminToken") &&( location.pathname === '/ResetPassword'||location.pathname === '/resetpassword')) {
+      navigate('/');
+    }
+  }, []);
   return (
     <>
       <Helmet>
         <meta charSet="utf-8" />
         <title>SkinElegance|ResetPassword</title>
       </Helmet>
-      <section className="section-space" style={{marginBottom: '-80px'  }} >
+      <section className="section-space w-100" style={{marginBottom: '-80px'  }} >
         <div className="container">
           <div className="row mb-n8" style={{ marginTop: '50px',marginBottom: '-200px'  }}>
             {/* Start Skin Elegance Section */}

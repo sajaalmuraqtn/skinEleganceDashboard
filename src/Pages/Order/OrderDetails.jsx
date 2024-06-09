@@ -41,7 +41,7 @@ export default function OrderDetails() {
   useEffect(() => {
     getOrder();
   }
-    , []);
+    , [order]);
 
   return (
     <>

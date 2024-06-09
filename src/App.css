@@ -8070,3 +8070,6 @@ body {
 .header-action-btn:hover{
 color: orangered;
 }
+.header-action-btn:hover{
+color: rgba(255, 0, 0, 0.623);
+}

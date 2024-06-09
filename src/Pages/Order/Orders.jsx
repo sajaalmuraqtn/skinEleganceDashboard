@@ -10,11 +10,16 @@ export default function Orders() {
     const queryParams = new URLSearchParams(location.search);
     const pageFromURL = queryParams.get('page');
     const [page, setPage] = useState(parseInt(pageFromURL) || 1);
-     const navigate = useNavigate(); // Use useNavigate instead of useHistory
+    const navigate = useNavigate(); // Use useNavigate instead of useHistory
 
     const [totalPages, setTotalPages] = useState(0);
     // Use array destructuring to get the state variable and the function to update it
     const [orders, setOrders] = useState([]);
+    const [confirmedOrder, setConfirmedOrder] = useState(0);
+    const [deliveredOrder, setDeliveredOrder] = useState(0);
+    const [cancelledOrder, setCancelledOrder] = useState(0);
+    const [onWayOrder, setOnWayOrder] = useState(0);
+    const [pendingOrder, setPendingOrder] = useState(0);
     const [params, setParams] = useSearchParams();
 
     const handleSearch = (e) => {
@@ -28,22 +33,27 @@ export default function Orders() {
             const token = localStorage.getItem("adminToken");
             const separator = '?'; // to put the sort and other filters method
             const { data } = await axios.get(`/order${separator}page=${page}&${searchQuery}`, { headers: { authorization: `Saja__${token}` } });
-             if (data.message === "success") {
+            if (data.message === "success") {
                 setOrders(data.orders);
-             }
+            }
         } catch (error) {
-         }
+        }
     };
     const getOrders = async (page) => {
         try {
             const token = localStorage.getItem("adminToken");
             const separator = '?'; // to put the sort and other filters method
             const { data } = await axios.get(`/order${separator}page=${page}`, { headers: { authorization: `Saja__${token}` } });
-             if (data.message === "success") {
+            if (data.message === "success") {
                 setOrders(data.orders);
-             }
+                setCancelledOrder(data.cancelledOrder);
+                setConfirmedOrder(data.confirmedOrder);
+                setDeliveredOrder(data.deliveredOrder);
+                setOnWayOrder(data.onWayOrder);
+                setPendingOrder(data.pendingOrder);
+            }
         } catch (error) {
-         }
+        }
     };
 
     useEffect(() => {
@@ -55,16 +65,15 @@ export default function Orders() {
                 setTotalPages(totalPages);
 
             }).catch(error => {
-             });
+            });
         } else {
             getOrders(page).then(data => {
                 const totalPages = Math.ceil(data.total / 8); // Assuming 9 products per page
                 setTotalPages(totalPages);
 
             }).catch(error => {
-             });
+            });
         }
-
 
     }, [page, params]);
 
@@ -101,6 +110,14 @@ export default function Orders() {
                                 type="search"
                                 name="search"
                                 placeholder='Search on Orders (city, status,updated,..)' />
+
+                            <div className='d-flex'>
+                                <span style={{ marginRight: '20px', backgroundColor: 'rgba(0, 140, 255, 0.623)', marginLeft: '20px', borderRadius: "3px", color: "black" }} className='p-1 px-2'>Pending : {pendingOrder} </span>
+                                <span style={{ marginRight: '20px', backgroundColor: 'rgba(255, 0, 187, 0.623)', borderRadius: "3px", color: "black" }} className='p-1 px-2'>Confirmed : {confirmedOrder} </span>
+                                <span style={{ marginRight: '20px', backgroundColor: 'rgba(251, 255, 0, 0.623)', borderRadius: "3px", color: "black" }} className='p-1 px-2'>OnWay : {onWayOrder} </span>
+                                <span style={{ marginRight: '20px', backgroundColor: 'rgba(21, 255, 0, 0.623)', borderRadius: "3px", color: "black" }} className='p-1 px-2'>Delivered : {deliveredOrder} </span>
+                                <span style={{ marginRight: '20px', backgroundColor: 'rgba(255, 0, 0, 0.623)', borderRadius: "3px", color: "black" }} className='p-1 px-2'>Canceled : {cancelledOrder} </span>
+                            </div>
                             <div className="app-content-actions-wrapper">
                                 <div className="filter-button-wrapper">
 
@@ -147,7 +164,12 @@ export default function Orders() {
                                     </div>
                                     <div className="product-cell category"><span className="cell-label">City:</span>{order.city}</div>
                                     <div className="product-cell status-cell">
-                                        <span className={order.status == "delivered" ? "status active" : "status disabled"}>{order.status}</span>
+                                        <span className='p-1 text-center' style={{
+                                            borderRadius: "3px", width: '80px', background: order.status === 'pending' ? 'rgba(0, 140, 255, 0.623)' :
+                                                order.status === 'confirmed' ? 'rgba(255, 0, 187, 0.623)' :
+                                                    order.status === 'onWay' ? 'rgba(251, 255, 0, 0.623)' :
+                                                        order.status === 'delivered' ? 'rgba(21, 255, 0, 0.623)' : 'rgba(255, 0, 0, 0.623)'
+                                        }}>{order.status}</span>
                                     </div>
                                     <div className="product-cell sales"><span className="cell-label"> couponName:</span> {!order.couponName ? ' --------- ' : order.couponName}</div>
                                     <div className="product-cell stock"><span className="cell-label"> CreatedAt:</span> {order.createdAt.split('T')[0]}</div>

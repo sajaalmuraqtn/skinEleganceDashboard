@@ -6,18 +6,21 @@ import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
 
 export default function ContactsPage() {
-     
-    const [contacts, setContacts] = useState([]);
 
+    const [contacts, setContacts] = useState([]);
+    const navigate = useNavigate();
     const getContacts = async (url) => {
         try {
             const token = localStorage.getItem("adminToken");
             const { data } = await axios.get(`/contact/${url}`, { headers: { authorization: `Saja__${token}` } });
-             if (data.message === "success") {
+            if (data.message === "success") {
+                if (data.contacts.length === 0) {
+                    return navigate('/Contacts/Add');
+                }
                 setContacts(data.contacts);
-             }
+            }
         } catch (error) {
-         }
+        }
     };
 
     const deleteInvalidConfirm = async () => {
@@ -29,7 +32,7 @@ export default function ContactsPage() {
                 getContacts("getAllContacts")
             }
         } catch (error) {
-         }
+        }
     };
 
     const deleteContact = async (contactId) => {

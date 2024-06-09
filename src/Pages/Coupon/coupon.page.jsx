@@ -28,6 +28,7 @@ export default function CouponPage() {
             const separator = '?'; // to put the sort and other filters method
             const { data } = await axios.get(`/coupon${separator}page=${page}&${searchQuery}`, { headers: { authorization: `Saja__${token}` } });
              if (data.message === "success") {
+                
                 setCoupons(data.coupons);
              }
         } catch (error) {
@@ -38,8 +39,10 @@ export default function CouponPage() {
             const token = localStorage.getItem("adminToken");
             const separator = '?'; // to put the sort and other filters method
             const { data } = await axios.get(`/coupon${separator}page=${page}`, { headers: { authorization: `Saja__${token}` } });
-            console.log(data);
-            if (data.message === "success") {
+             if (data.message === "success") {
+                if (data.coupons.length===0) {
+                    navigate('/Coupons/Add')
+                }
                 setCoupons(data.coupons);
              }
         } catch (error) {
@@ -50,8 +53,7 @@ export default function CouponPage() {
         const searchQuery = params.get('query'); // Get the search query from URL parameters
         const itemsPerPage = 9; // Set number of items per page
         if (searchQuery) {
-            console.log(location.state);
-            getSearchCoupons(page, searchQuery).then(data => {
+             getSearchCoupons(page, searchQuery).then(data => {
                 if (data && data.total) {
                     const totalPages = Math.ceil(data.total / 9); // Assuming 9 products per page
                     setTotalPages(totalPages);

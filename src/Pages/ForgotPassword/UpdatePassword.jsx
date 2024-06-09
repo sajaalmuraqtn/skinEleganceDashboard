@@ -58,9 +58,9 @@ export default function UpdatePassword() {
         <meta charSet="utf-8" />
         <title>SkinElegance|UpdatePassword</title>
       </Helmet>
-      <section className="section-space" >
+      <section className="section-space" style={{height:'100vh'}} >
         <div className="container">
-          <div className="row mb-n8" style={{ marginTop: '50px' }}>
+          <div className="row mb-n8" style={{ marginTop: '50px' ,marginLeft:'100px' }}>
             {/* Start Skin Elegance Section */}
             <div className="col-12 col-md-6">
               <div className="hero-slide-text-img" style={{ marginTop: '-60px' }}>
@@ -70,7 +70,7 @@ export default function UpdatePassword() {
             {/* End Skin Elegance Section */}
 
             {/* Start Login Section */}
-            <div className="col-lg-6 mb-8">
+            <div className="col-lg-6 mb-8" style={{ marginTop: '-60px' }}>
               <div className="my-account-item-wrap">
                 <h3 className="title fs-1">Change Password</h3>
                 <div className="my-account-form">
